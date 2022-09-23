@@ -32,8 +32,13 @@ function validateString(elem, value, callBack, length, errorMsg) {
 }
 
 function checkNoroffEmail(elem) {
-  return elem.value.endsWith('noroff.no')
+  const regex = /^[\w\-.]+@(stud.)?noroff.no$/
+  return regex.test(elem.value)
 }
+
+/*function checkNoroffEmail(elem) {
+  return elem.value.endsWith('noroff.no')
+}*/
 
 function checkLength(elem, length) {
   return elem.value.length >= length
