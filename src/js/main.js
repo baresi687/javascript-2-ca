@@ -2,7 +2,7 @@ import "../css/style.css"
 
 const formInputs = document.querySelectorAll('#form-inputs input')
 const email = document.querySelector('#email-address')
-const emailError = 'Email must be a valid noroff.no adress'
+const emailError = 'Email must be a noroff.no or stud.noroff.no adress'
 const password = document.querySelector('#password')
 const passwordError = 'Password must 8 characters or more'
 const form = document.querySelector('form')
@@ -36,9 +36,12 @@ function checkNoroffEmail(elem) {
   return regex.test(elem.value)
 }
 
-/*function checkNoroffEmail(elem) {
-  return elem.value.endsWith('noroff.no')
-}*/
+function checkName(elem) {
+  const regex = /^[\w]+$/
+  return regex.test(elem.trim())
+}
+
+console.log(checkName(' hesAf_ddsfsd'));
 
 function checkLength(elem, length) {
   return elem.value.length >= length
