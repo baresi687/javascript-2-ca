@@ -1,7 +1,5 @@
-import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString} from "./components/validation";
+import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, showErrorMsg} from "./components/validation";
 import {API_BASE_URL, apiSignUp} from "./api/endpoints";
-
-const formInputs = document.querySelectorAll('#form-inputs input')
 
 const signUpform = document.querySelector('form')
 const name = document.querySelector('#name')
@@ -12,11 +10,18 @@ const password = document.querySelector('#password')
 const passwordError = 'Password must 8 characters or more'
 const confirmPassword = document.querySelector('#confirm-password')
 const conFirmPasswordError = 'Confirmed password does not match password'
+const formInputs = document.querySelectorAll('#form-inputs input')
 
 signUpform.addEventListener('submit', function (event)  {
   event.preventDefault()
-  if (validateString(name, name.value, checkName,null, nameError) && validateString(email, email.value, checkNoroffEmail, null, emailError) && validateString(password, password.value, checkLength, 8, passwordError) && validateString(confirmPassword, confirmPassword.value, checkConfirmPassword, password.value, conFirmPasswordError)) {
 
+  const isFormValid =
+      validateString(name, name.value, checkName,null, nameError) &&
+      validateString(email, email.value, checkNoroffEmail, null, emailError) &&
+      validateString(password, password.value, checkLength, 8, passwordError) &&
+      validateString(confirmPassword, confirmPassword.value, checkConfirmPassword, password.value, conFirmPasswordError);
+
+  if (isFormValid) {
     const formData = {
       'name': name.value,
       'email': email.value,
@@ -34,8 +39,8 @@ formInputs.forEach((item) => {
 })
 
 async function signUp(url, postData) {
-  document.querySelector('#general-error').innerHTML = ''
-  try {
+  document.querySelector('#general-error').classList.add('hidden')
+  try  {
     const options = {
       method: 'POST',
       headers: {
@@ -45,28 +50,14 @@ async function signUp(url, postData) {
     };
     const response = await fetch(url, options)
     const responseJSON = await response.json()
-    if (!response.ok) {
-      document.querySelector('#general-error').innerHTML = responseJSON.message;
-      document.querySelector('#general-error').scrollIntoView({block: "center"})
-    } else {
+    if (response.ok) {
       location.href = '../login.html'
+    } else {
+      showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
     }
   } catch (error) {
-    console.log(error);
-    document.querySelector('form').innerHTML += `<h1>Something went wrong.. please try again later</h1>`;
+    showErrorMsg(
+        document.querySelector('#general-error'),
+        'Something went wrong.. please try again later')
   }
 }
-
-/*const formTest = {
-  'name': 'gfdffhgfgdhdfghsrrrrg',
-  'email': 'gfdgsghfdggfhdfghfgfgd@noroff.no',
-  'password': '55555555'
-}
-
-const profileExists = {
-  'name': 'gfdfsrrrrg',
-  'email': 'gfdgsgfgfgd@noroff.no',
-  'password': '55555555'
-}
-
-signUp(API_BASE_URL+apiSignUp, formTest)*/

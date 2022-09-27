@@ -26,4 +26,10 @@ function validateString(elem, value, callBack, length, errorMsg) {
   }
 }
 
-export {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString}
+function showErrorMsg(elem, message) {
+  elem.classList.remove('hidden');
+  elem.innerHTML = message;
+  elem.scrollIntoView({block: "center"})
+}
+
+export {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, showErrorMsg}
