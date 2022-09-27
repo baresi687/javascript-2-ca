@@ -13,7 +13,7 @@ function checkLength(elem, length) {
 }
 
 function checkConfirmPassword(value, password) {
-  return value.value === password;
+  return value.value.trim() === password.trim();
 }
 
 function validateString(elem, value, callBack, length, errorMsg) {

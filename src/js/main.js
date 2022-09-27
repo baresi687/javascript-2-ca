@@ -1,4 +1,5 @@
 import "../css/style.css"
+/*
 import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString} from "./components/validation";
 import {signUp} from "./signup";
 import {API_BASE_URL, apiSignUp} from "./api/endpoints";
@@ -27,7 +28,6 @@ if (document.querySelector('form')) {
         'password': password.value
       }
       signUp(API_BASE_URL+apiSignUp, formData)
-      location.href = '../login.html'
     }
   })
 
@@ -39,9 +39,9 @@ if (document.querySelector('form')) {
   })
 }
 
-const formTest = {
-  'name': 'gfdffhgdhdfghsrrrrg',
-  'email': 'gfdgsghfdghdfghfgfgd@noroff.no',
+/!*const formTest = {
+  'name': 'gfdffhgfgdhdfghsrrrrg',
+  'email': 'gfdgsghfdggfhdfghfgfgd@noroff.no',
   'password': '55555555'
 }
 
@@ -51,4 +51,5 @@ const profileExists = {
   'password': '55555555'
 }
 
-signUp(API_BASE_URL+apiSignUp, profileExists)
+signUp(API_BASE_URL+apiSignUp, formTest)*!/
+*/
