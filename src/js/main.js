@@ -1,5 +1,7 @@
 import "../css/style.css"
-import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString} from "./componoents/validation";
+import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString} from "./components/validation";
+import {signUp} from "./signup";
+import {API_BASE_URL, apiSignUp} from "./api/endpoints";
 
 if (document.querySelector('form')) {
 
@@ -18,7 +20,14 @@ if (document.querySelector('form')) {
   signUpform.addEventListener('submit', function (event)  {
     event.preventDefault()
     if (validateString(name, name.value, checkName,null, nameError) && validateString(email, email.value, checkNoroffEmail, null, emailError) && validateString(password, password.value, checkLength, 8, passwordError) && validateString(confirmPassword, confirmPassword.value, checkConfirmPassword, password.value, conFirmPasswordError)) {
-      location.href = '../main.html'
+
+      const formData = {
+        'name': name.value,
+        'email': email.value,
+        'password': password.value
+      }
+      signUp(API_BASE_URL+apiSignUp, formData)
+      location.href = '../login.html'
     }
   })
 
@@ -29,3 +38,17 @@ if (document.querySelector('form')) {
     }
   })
 }
+
+const formTest = {
+  'name': 'gfdffhgdhdfghsrrrrg',
+  'email': 'gfdgsghfdghdfghfgfgd@noroff.no',
+  'password': '55555555'
+}
+
+const profileExists = {
+  'name': 'gfdfsrrrrg',
+  'email': 'gfdgsgfgfgd@noroff.no',
+  'password': '55555555'
+}
+
+signUp(API_BASE_URL+apiSignUp, profileExists)
