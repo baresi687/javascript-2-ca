@@ -1,4 +1,4 @@
-import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, showErrorMsg} from "./components/validation";
+import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, showErrorMsg} from "./utils/validation";
 import {API_BASE_URL, apiSignUp} from "./api/endpoints";
 
 const signUpform = document.querySelector('form')

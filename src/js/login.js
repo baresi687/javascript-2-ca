@@ -4,7 +4,7 @@ import {
   validateString,
   showErrorMsg
 
-} from "./components/validation";
+} from "./utils/validation";
 import {API_BASE_URL, apiLogin} from "./api/endpoints";
 
 const loginForm = document.querySelector('form')
@@ -51,8 +51,7 @@ async function login(url, postData) {
     const responseJSON = await response.json()
     if (response.ok) {
       console.log(responseJSON);
-
-      /*location.href = '../main.html'*/
+      location.href = '../main.html'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
     }
