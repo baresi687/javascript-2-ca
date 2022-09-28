@@ -51,6 +51,7 @@ async function signUp(url, postData) {
     const response = await fetch(url, options)
     const responseJSON = await response.json()
     if (response.ok) {
+      console.log(responseJSON.message);
       location.href = '../login.html'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
