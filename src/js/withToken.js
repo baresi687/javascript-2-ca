@@ -1,6 +1,6 @@
 import {clearStorage} from "./utils/storage";
 
-if(!localStorage.getItem('accessToken')) {location.href = '/'}
+if(!localStorage.getItem('accessToken')) {location.href = '/login.html'}
 
 const token = localStorage.getItem('accessToken')
 const {name, email} = JSON.parse(localStorage.getItem('userKey'))
