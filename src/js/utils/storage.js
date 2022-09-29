@@ -4,7 +4,7 @@ function saveToStorage(key, value) {
 
 function clearStorage() {
   localStorage.clear()
-  location.href = '/'
+  location.href = '/login.html'
 }
 
 export {saveToStorage, clearStorage}
