@@ -5,6 +5,7 @@ import {
   showErrorMsg
 
 } from "./utils/validation";
+import {saveToStorage} from "./utils/storage";
 import {API_BASE_URL, apiLogin} from "./api/endpoints";
 
 const loginForm = document.querySelector('form')
@@ -50,7 +51,14 @@ async function login(url, postData) {
     const response = await fetch(url, options)
     const responseJSON = await response.json()
     if (response.ok) {
-      console.log(responseJSON);
+      saveToStorage('accessToken', responseJSON.accessToken)
+
+      const userKey = {
+        name: responseJSON.name,
+        email: responseJSON.email
+      }
+
+      saveToStorage('userKey',JSON.stringify(userKey))
       location.href = '../main.html'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
@@ -58,6 +66,6 @@ async function login(url, postData) {
   } catch (error) {
     showErrorMsg(
         document.querySelector('#general-error'),
-        'Something went wrong.. please try again later')
+        'Something went wrong.. please try again later', error)
   }
 }
