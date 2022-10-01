@@ -22,13 +22,16 @@
         <div class="md:block md:w-auto" id="navbar-default">
           <ul class="flex flex-col items-center p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
+              <a href="/" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
+            </li>
+            <li>
               <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Create Post</a>
             </li>
             <li>
               <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">My Posts</a>
             </li>
             <li>
-              <button id="log-out" class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Log out</button>
+              <button id="log-out" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Log out</button>
             </li>
           </ul>
         </div>
@@ -38,38 +41,8 @@
   <main>
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <section id="post-feed" class="m-auto">
-        <h1 class="my-8 text-2xl font-semibold dark:text-black">Post feed</h1>
+        <h1 class="my-8 text-2xl font-semibold dark:text-black">Home</h1>
         <div id="posts-container" class="grid gap-4 grid-cols-3 grid-rows-3">
-         <!-- <a href="#" class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">By Steve_Johnson</p>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">On September 21, 2022</p>
-          </a>
-          <a href="#" class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">By Steve_Johnson</p>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">On September 21, 2022</p>
-          </a>
-          <a href="#" class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">By Steve_Johnson</p>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">On September 21, 2022</p>
-          </a>
-          <a href="#" class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">By Steve_Johnson</p>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">On September 21, 2022</p>
-          </a>
-          <a href="#" class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">By Steve_Johnson</p>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">On September 21, 2022</p>
-          </a>
-          <a href="#" class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">By Steve_Johnson</p>
-            <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">On September 21, 2022</p>
-          </a>-->
         </div>
         <div id="general-error" class="text-2xl py-3.5 text-red-500 text-center hidden"></div>
       </section>
