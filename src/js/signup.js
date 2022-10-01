@@ -56,7 +56,6 @@ async function signUp(url, postData) {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
     }
   } catch (error) {
-    showErrorMsg(document.querySelector('#general-error'),
-        'Something went wrong.. please try again later')
+    showErrorMsg(document.querySelector('#general-error'))
   }
 }
