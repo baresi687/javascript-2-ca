@@ -11,3 +11,5 @@ userGreeting.innerHTML = `Hi ${name}`
 logOut.addEventListener('click', function () {
   clearStorage()
 })
+
+export {token, name, email}
