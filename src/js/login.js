@@ -10,7 +10,7 @@ import {API_BASE_URL, apiLogin} from "./api/endpoints";
 
 const loginForm = document.querySelector('form')
 const email = document.querySelector('#email-address')
-const emailError = 'Email must be a noroff.no or stud.noroff.no adress'
+const emailError = 'Email must be a noroff.no or stud.noroff.no address'
 const password = document.querySelector('#password')
 const passwordError = 'Password must 8 characters or more'
 const formInputs = document.querySelectorAll('#form-inputs input')
@@ -64,7 +64,6 @@ async function login(url, postData) {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
     }
   } catch (error) {
-    showErrorMsg(document.querySelector('#general-error'),
-        'Something went wrong.. please try again later')
+    showErrorMsg(document.querySelector('#general-error'))
   }
 }
