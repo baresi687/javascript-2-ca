@@ -3,8 +3,7 @@ function saveToStorage(key, value) {
 }
 
 function getFromStorage(key) {
-  const value = localStorage.getItem(key)
-  return JSON.parse(value)
+ return localStorage.getItem(key)
 }
 
 function clearStorage() {

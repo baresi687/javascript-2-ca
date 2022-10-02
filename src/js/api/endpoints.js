@@ -8,7 +8,8 @@ const apiCreatePost = '/posts'
 let apiGetUserPosts = `/profiles/`
 if (localStorage.getItem('userKey')) {
   const user = getFromStorage('userKey')
-  apiGetUserPosts += `${user.name}?_posts=true`
+  const userParsed = JSON.parse(user)
+  apiGetUserPosts += `${userParsed.name}?_posts=true`
 }
 
 export {API_BASE_URL, apiSignUp, apiLogin, apiGetPosts, apiCreatePost, apiGetUserPosts}

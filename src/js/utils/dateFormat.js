@@ -4,4 +4,12 @@ function formatDate(input) {
   })
 }
 
-export {formatDate}
+function formatDateLong(input) {
+  return new Date(input).toLocaleDateString('en-us', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric'
+  })
+}
+
+export {formatDate, formatDateLong}

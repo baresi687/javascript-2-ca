@@ -1,10 +1,11 @@
 import {API_BASE_URL, apiCreatePost} from "./api/endpoints";
-import {token} from "./withToken";
+import {getFromStorage} from "./utils/storage";
 import {showErrorMsg} from "./utils/validation";
 
 const createPostForm = document.querySelector('#create-post')
 const postTitle = document.querySelector('#post-title')
 const postBody = document.querySelector('#post-body')
+const token = getFromStorage('accessToken')
 
 createPostForm.addEventListener('submit', function (event) {
   event.preventDefault()
@@ -29,7 +30,7 @@ async function createPost(url, postData) {
     const response = await fetch(url, options)
     await response.json()
     if (response.ok) {
-      location.href = '/'
+      location.href = '../main.html'
     } else {
       showErrorMsg(document.querySelector('#general-error'))
     }

@@ -1,10 +1,10 @@
-import {token, name, email} from "./withToken";
 import {API_BASE_URL, apiGetPosts} from "./api/endpoints";
+import {getFromStorage} from "./utils/storage";
 import {showErrorMsg} from "./utils/validation";
 import {formatDate} from "./utils/dateFormat";
 
 const postsContainer = document.querySelector('#posts-container')
-
+const token = getFromStorage('accessToken')
 async function getPosts(url) {
   document.querySelector('#general-error').classList.add('hidden')
   try  {
