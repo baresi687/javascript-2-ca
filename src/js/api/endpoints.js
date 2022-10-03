@@ -11,5 +11,6 @@ if (localStorage.getItem('userKey')) {
   const userParsed = JSON.parse(user)
   apiGetUserPosts += `${userParsed.name}?_posts=true`
 }
+const EDIT_DELETE_USER_POST = API_BASE_URL + '/posts/'
 
-export {API_BASE_URL, apiSignUp, apiLogin, apiGetPosts, apiCreatePost, apiGetUserPosts}
+export {API_BASE_URL, apiSignUp, apiLogin, apiGetPosts, apiCreatePost, apiGetUserPosts, EDIT_DELETE_USER_POST}
