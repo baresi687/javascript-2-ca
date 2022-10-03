@@ -58,7 +58,7 @@ async function login(url, postData) {
         email: responseJSON.email
       }
 
-      saveToStorage('userKey',JSON.stringify(userKey))
+      saveToStorage('userKey', userKey)
       location.href = '../main.html'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
