@@ -28,8 +28,7 @@ async function getPosts(url) {
 
     postsContainer.innerHTML += data.join('')
   } catch (error) {
-    showErrorMsg(document.querySelector('#general-error'),
-        'Something went wrong.. please try again later')
+    showErrorMsg(document.querySelector('#general-error'))
   }
 }
 

@@ -46,8 +46,7 @@ async function getUserPosts(url) {
     }
 
   } catch (error) {
-    showErrorMsg(document.querySelector('#general-error'),
-        'Something went wrong.. please try again later')
+    showErrorMsg(document.querySelector('#general-error'))
   } finally {
     const deleteBtn = document.querySelectorAll('.delete-btn')
     deleteBtn.forEach((btn) => {
@@ -59,26 +58,23 @@ async function getUserPosts(url) {
     })
     const editBtn = document.querySelectorAll('.edit-btn')
     editBtn.forEach((btn) => {
-      btn.onclick = function (event) {
-        postEditModal.classList.remove('hidden')
-        console.log(this.id);
+      btn.onclick = function () {
         postId = this.id.substring(10)
-        console.log(postId);
-        const postTitle = document.querySelector(`#post-title-${postId}`).textContent
-        const postBody = document.querySelector(`#post-body-${postId}`).textContent
-        document.querySelector('#post-title').value = postTitle
-        document.querySelector('#post-body').value = postBody
+        const getPostTitle = document.querySelector(`#post-title-${postId}`).textContent
+        const getPostBody = document.querySelector(`#post-body-${postId}`).textContent
+        document.querySelector('#post-title').value = getPostTitle
+        document.querySelector('#post-body').value = getPostBody
+        const editPostBtn = document.querySelector('#edit-post')
+        const API_EDIT_POST = `${API_BASE_URL}/posts/${postId}`
 
-        const API_EDIT_POST = API_BASE_URL+'/posts/'+postId
-        console.log(API_EDIT_POST);
+        postEditModal.classList.remove('hidden')
 
-        const editPostBtn = document.querySelector('#edit-post-btn')
-        editPostBtn.onclick = function () {
+        editPostBtn.onsubmit = function (event) {
+          event.preventDefault()
           const putData = {
             title: document.querySelector('#post-title').value,
             body: document.querySelector('#post-body').value,
           }
-          console.log(document.querySelector('#post-body').value);
           editPost(API_EDIT_POST, putData)
         }
       }
@@ -105,11 +101,13 @@ async function editPost(url, putData) {
       body: JSON.stringify(putData)
     };
     const response = await fetch(url, options)
-    await response.json()
-    location.reload()
+    if (response.ok) {
+      await response.json()
+      location.reload()
+    }
 
   } catch (error) {
-    console.log(error);
+    showErrorMsg(document.querySelector('#general-error-edit'))
   }
 }
 
@@ -118,7 +116,7 @@ async function deletePost(url) {
     const options = {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${token}`
+        'Authorization': `Bearer ${token}`
       },
     };
     const response = await fetch(url, options)
@@ -126,7 +124,6 @@ async function deletePost(url) {
     location.reload()
 
   } catch (error) {
-    showErrorMsg(document.querySelector('#general-error'),
-        'Something went wrong.. please try again later')
+    showErrorMsg(document.querySelector('#general-error'))
   }
 }
