@@ -1,5 +1,5 @@
 import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, showErrorMsg} from "./utils/validation";
-import {API_BASE_URL, apiSignUp} from "./api/endpoints";
+import {USER_SIGNUP_URL} from "./api/endpoints";
 
 const signUpform = document.querySelector('form')
 const name = document.querySelector('#name')
@@ -27,7 +27,7 @@ signUpform.addEventListener('submit', function (event)  {
       'email': email.value,
       'password': password.value
     }
-    signUp(API_BASE_URL+apiSignUp, formData)
+    signUp(USER_SIGNUP_URL, formData)
   }
 })
 

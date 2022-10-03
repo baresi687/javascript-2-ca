@@ -1,4 +1,4 @@
-import {API_BASE_URL, apiGetPosts} from "./api/endpoints";
+import {GET_POSTS_URL} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {showErrorMsg} from "./utils/validation";
 import {formatDate} from "./utils/dateFormat";
@@ -32,4 +32,4 @@ async function getPosts(url) {
   }
 }
 
-getPosts(API_BASE_URL+apiGetPosts)
+getPosts(GET_POSTS_URL)

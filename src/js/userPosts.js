@@ -1,4 +1,4 @@
-import {API_BASE_URL, apiGetUserPosts, EDIT_DELETE_USER_POST} from "./api/endpoints";
+import {GET_USER_POSTS_URL, EDIT_DELETE_USER_POST} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {formatDateLong} from "./utils/dateFormat";
 import {showErrorMsg} from "./utils/validation";
@@ -84,7 +84,7 @@ window.onclick = function (event) {
   }
 }
 
-getUserPosts(API_BASE_URL+apiGetUserPosts)
+getUserPosts(GET_USER_POSTS_URL)
 
 async function editPost(url, putData) {
   try {

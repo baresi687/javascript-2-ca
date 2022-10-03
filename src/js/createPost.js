@@ -1,4 +1,4 @@
-import {API_BASE_URL, apiCreatePost} from "./api/endpoints";
+import {CREATE_POST_URL} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {showErrorMsg} from "./utils/validation";
 
@@ -13,7 +13,7 @@ createPostForm.addEventListener('submit', function (event) {
     title: postTitle.value,
     body: postBody.value
   }
-  createPost(API_BASE_URL+apiCreatePost, postData)
+  createPost(CREATE_POST_URL, postData)
 })
 
 async function createPost(url, postData) {

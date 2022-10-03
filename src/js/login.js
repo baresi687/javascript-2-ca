@@ -6,7 +6,7 @@ import {
 
 } from "./utils/validation";
 import {saveToStorage} from "./utils/storage";
-import {API_BASE_URL, apiLogin} from "./api/endpoints";
+import {USER_LOGIN_URL} from "./api/endpoints";
 
 const loginForm = document.querySelector('form')
 const email = document.querySelector('#email-address')
@@ -27,7 +27,7 @@ loginForm.addEventListener('submit', function (event)  {
       'email': email.value,
       'password': password.value
     }
-    login(API_BASE_URL+apiLogin, formData)
+    login(USER_LOGIN_URL, formData)
   }
 })
 
