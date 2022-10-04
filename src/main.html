@@ -10,7 +10,7 @@
   <script type="module" src="js/withToken.js"></script>
   <script type="module" src="js/main.js"></script>
 </head>
-<body>
+<body class="overflow-y-scroll">
 <div>
   <header>
     <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
@@ -42,8 +42,7 @@
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <section id="post-feed" class="m-auto w-4/6">
         <h1 class="my-8 text-2xl font-semibold dark:text-black">Home</h1>
-        <div id="posts-container" class="grid gap-4 grid-cols-3 grid-rows-3">
-        </div>
+        <div id="posts-container" class="flex flex-wrap sm:grid gap-4 grid-cols-2 md:grid-cols-3"></div>
         <div id="general-error" class="text-2xl py-3.5 text-red-500 text-center hidden"></div>
       </section>
     </div>
