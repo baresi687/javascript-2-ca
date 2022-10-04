@@ -5,10 +5,10 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>SocialMedia - Create Post</title>
+  <title>SocialMedia - My Posts</title>
   <script type="module" src="js/script.js"></script>
   <script type="module" src="js/withToken.js"></script>
-  <script type="module" src="js/createPost.js"></script>
+  <script type="module" src="js/userPosts.js"></script>
 </head>
 <body class="overflow-y-scroll">
   <header>
@@ -39,27 +39,34 @@
   </header>
   <main>
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-      <section class="m-auto w-72 bg-gray-800 text-white my-8 py-8 px-8 rounded-lg">
-        <h1 class="text-2xl font-semibold">Create Post</h1>
-        <form id="create-post" class="mt-8 space-y-6" action="#" method="POST">
-          <input type="hidden" name="remember" value="true">
-          <div id="form-inputs" class="-space-y-px rounded-md shadow-sm">
-            <div>
-              <label for="post-title" class="block py-2">Title</label>
-              <input id="post-title" name="post-title" type="text" required class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Title of post (Required)">
+      <section class="m-auto w-4/6">
+        <h1 class="my-8 text-2xl font-semibold dark:text-black">My Posts</h1>
+        <div id="user-posts-container"></div>
+        <div id="general-error" class="text-2xl py-3.5 text-red-500 text-center hidden"></div>
+      </section>
+      <section id="modal" class="hidden fixed z-10 m-0 w-full bg-stone-900/90 h-full w-full left-0 top-0">
+        <div id="modal-content" class="relative top-32 m-auto w-80 dark:bg-gray-800 dark:border-gray-700 px-8 py-8 rounded-lg">
+          <h1 class="text-2xl font-semibold dark:text-white">Edit Post</h1>
+          <form id="edit-post" class="mt-8 space-y-6" action="#">
+            <input type="hidden" name="remember" value="true">
+            <div id="form-inputs" class="-space-y-px rounded-md shadow-sm">
+              <div>
+                <label for="post-title" class="block py-2 text-white">Title</label>
+                <input id="post-title" name="post-title" type="text" required class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Title of post (Required)">
+              </div>
+              <div>
+                <label for="post-body" class="block py-2 text-white">Body</label>
+                <textarea id="post-body" rows="6" required class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Body of post (Required)"></textarea>
+              </div>
             </div>
             <div>
-              <label for="post-body" class="block py-2">Body</label>
-              <textarea id="post-body" rows="6" required class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Body of post (Required)"></textarea>
+              <button id="edit-post-btn" type="submit" class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Edit Post
+              </button>
             </div>
-          </div>
-          <div>
-            <button type="submit" class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-              Create Post
-            </button>
-          </div>
-          <div id="general-error" class="text-2xl py-3.5 text-red-500 text-center hidden"></div>
-        </form>
+            <div id="general-error-edit" class="text-2xl py-3.5 text-red-500 text-center hidden"></div>
+          </form>
+        </div>
       </section>
     </div>
   </main>

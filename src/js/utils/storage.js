@@ -1,5 +1,10 @@
 function saveToStorage(key, value) {
-  localStorage.setItem(key, value)
+  localStorage.setItem(key, JSON.stringify(value))
+}
+
+function getFromStorage(key) {
+  return (localStorage.getItem(key) ?
+      JSON.parse(localStorage.getItem(key)) : [])
 }
 
 function clearStorage() {
@@ -7,4 +12,4 @@ function clearStorage() {
   window.location.replace('/login.html')
 }
 
-export {saveToStorage, clearStorage}
+export {saveToStorage, clearStorage, getFromStorage}

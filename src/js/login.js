@@ -6,7 +6,7 @@ import {
 
 } from "./utils/validation";
 import {saveToStorage} from "./utils/storage";
-import {API_BASE_URL, apiLogin} from "./api/endpoints";
+import {USER_LOGIN_URL} from "./api/endpoints";
 
 const loginForm = document.querySelector('form')
 const email = document.querySelector('#email-address')
@@ -19,15 +19,15 @@ loginForm.addEventListener('submit', function (event)  {
   event.preventDefault()
 
   const isFormValid =
-      validateString(email, email.value, checkNoroffEmail, null, emailError) &&
-      validateString(password, password.value, checkLength, 8, passwordError)
+      validateString(email, checkNoroffEmail, null, emailError) &&
+      validateString(password, checkLength, 8, passwordError)
 
   if (isFormValid) {
     const formData = {
       'email': email.value,
       'password': password.value
     }
-    login(API_BASE_URL+apiLogin, formData)
+    login(USER_LOGIN_URL, formData)
   }
 })
 
@@ -58,7 +58,7 @@ async function login(url, postData) {
         email: responseJSON.email
       }
 
-      saveToStorage('userKey',JSON.stringify(userKey))
+      saveToStorage('userKey', userKey)
       location.href = '../main.html'
     } else {
       showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
