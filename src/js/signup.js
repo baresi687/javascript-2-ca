@@ -5,7 +5,7 @@ const signUpform = document.querySelector('form')
 const name = document.querySelector('#name')
 const nameError = 'Name must not contain punctuation symbols apart from underscore'
 const email = document.querySelector('#email-address')
-const emailError = 'Email must be a noroff.no or stud.noroff.no adress'
+const emailError = 'Email must be a noroff.no or stud.noroff.no address'
 const password = document.querySelector('#password')
 const passwordError = 'Password must 8 characters or more'
 const confirmPassword = document.querySelector('#confirm-password')
@@ -16,10 +16,10 @@ signUpform.addEventListener('submit', function (event)  {
   event.preventDefault()
 
   const isFormValid =
-      validateString(name, name.value, checkName,null, nameError) &&
-      validateString(email, email.value, checkNoroffEmail, null, emailError) &&
-      validateString(password, password.value, checkLength, 8, passwordError) &&
-      validateString(confirmPassword, confirmPassword.value, checkConfirmPassword, password.value, conFirmPasswordError);
+      validateString(name, checkName,null, nameError) &&
+      validateString(email, checkNoroffEmail, null, emailError) &&
+      validateString(password, checkLength, 8, passwordError) &&
+      validateString(confirmPassword, checkConfirmPassword, password, conFirmPasswordError);
 
   if (isFormValid) {
     const formData = {

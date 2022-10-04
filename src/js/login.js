@@ -19,8 +19,8 @@ loginForm.addEventListener('submit', function (event)  {
   event.preventDefault()
 
   const isFormValid =
-      validateString(email, email.value, checkNoroffEmail, null, emailError) &&
-      validateString(password, password.value, checkLength, 8, passwordError)
+      validateString(email, checkNoroffEmail, null, emailError) &&
+      validateString(password, checkLength, 8, passwordError)
 
   if (isFormValid) {
     const formData = {

@@ -12,11 +12,11 @@ function checkLength(elem, length) {
   return elem.value.trim().length >= length
 }
 
-function checkConfirmPassword(value, password) {
-  return value.value.trim() === password.trim();
+function checkConfirmPassword(elem, password) {
+  return elem.value.trim() === password.value.trim();
 }
 
-function validateString(elem, value, callBack, length, errorMsg) {
+function validateString(elem, callBack, length, errorMsg) {
   if (!callBack(elem, length)) {
     elem.classList.add('bg-red-50')
     elem.nextElementSibling.innerHTML = errorMsg
