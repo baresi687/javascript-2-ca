@@ -5,7 +5,7 @@ import {showErrorMsg} from "./utils/validation";
 
 const postId = new URLSearchParams(window.location.search).get('id')
 const postDetailsContainer = document.querySelector('#post-details-container')
-const titleOfPage = document.querySelectorAll('.title-post')
+const titleOfPage = document.querySelector('title')
 const token = getFromStorage('accessToken')
 
 async function getPostDetails(url) {
@@ -21,13 +21,13 @@ async function getPostDetails(url) {
     if (response.ok) {
       const responseJSON = await response.json()
       const {title, author, created, body, tags, media} = responseJSON
-      titleOfPage.forEach((item) => item.innerHTML += title)
+      titleOfPage.innerHTML += title
       const dateFormat = formatDateLong(created)
       postDetailsContainer.innerHTML =
           `<div class="p-6 my-2 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">                     
              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${title}</h5>
              <small class="font-normal text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${author.name}</span> on ${dateFormat}</small>
-             <p class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line">${body}</p>                                                                      
+             <p class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line">${body}</p>                                                                     
            </div>`
       const imageHtml = `<div><img src="${media}" alt='Image'></div>`
       const tagsHtml = `<div><p class="dark:text-white pt-6">Tags: ${tags}</p></div>`
