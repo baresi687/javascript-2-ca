@@ -42,6 +42,12 @@
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <section id="post-feed" class="m-auto w-4/6">
         <h1 class="my-8 text-2xl font-semibold dark:text-black">Home</h1>
+        <div class="flex gap-4 pb-8 w-full">
+          <label for="search-posts" class="grow">
+          <input id="search-posts" class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" type="text" placeholder="Search for posts in title and body">
+          </label>
+          <button id="search-btn" class="rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Search</button>
+        </div>
         <div id="posts-container" class="flex flex-wrap sm:grid gap-4 grid-cols-2 md:grid-cols-3"></div>
         <div id="general-error" class="text-2xl py-3.5 text-red-500 text-center hidden"></div>
       </section>
