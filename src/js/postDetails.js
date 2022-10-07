@@ -23,20 +23,25 @@ async function getPostDetails(url) {
       const {title, author, created, body, tags, media} = responseJSON
       titleOfPage.innerHTML += title
       const dateFormat = formatDateLong(created)
-      postDetailsContainer.innerHTML =
-          `<div class="p-6 my-2 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">                     
-             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${title}</h5>
-             <small class="font-normal text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${author.name}</span> on ${dateFormat}</small>
-             <p class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line">${body}</p>                                                                     
+
+      postDetailsContainer.innerHTML = `
+           <div id="post-content-container" class="p-6 my-2 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+             <div id="post-text-img" class="block xl:flex justify-between w-full gap-16">
+               <div class="basis-1/2 flex-grow">
+                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${title}</h5>
+                 <small class="font-normal text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${author.name}</span> on ${dateFormat}</small>
+                 <p class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line">${body}</p>
+               </div>                                                
+             </div>                      
            </div>`
-      const imageHtml = `<div><img src="${media}" alt='Image'></div>`
-      const tagsHtml = `<div><p class="dark:text-white pt-6">Tags: ${tags}</p></div>`
-      if (media.length) {
-        postDetailsContainer.querySelector('div').insertAdjacentHTML('beforeend', imageHtml)
-      }
-      if (tags.length) {
-        postDetailsContainer.querySelector('div').insertAdjacentHTML('beforeend', tagsHtml)
-      }
+
+      const imageHtml = `<div class="basis-auto align-super"><img src="${media}" alt="Image" class="max-h-64 rounded-md"></div>`
+      const tagsHtml = `<p class="block dark:text-white pt-6">Tags: <span class="italic">${tags.join(', ')}</span></p>`
+
+      media.length ?
+        postDetailsContainer.querySelector('#post-text-img').insertAdjacentHTML('beforeend', imageHtml) : null
+      tags.length ?
+        postDetailsContainer.querySelector('#post-content-container').insertAdjacentHTML('beforeend',tagsHtml) : null
 
     } else {
       showErrorMsg(document.querySelector('#general-error'))
