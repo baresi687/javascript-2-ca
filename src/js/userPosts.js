@@ -151,7 +151,6 @@ async function deletePost(url) {
     } else {
       showErrorMsg(document.querySelector('#general-error'))
     }
-
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
   }

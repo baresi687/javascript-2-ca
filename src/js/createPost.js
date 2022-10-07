@@ -32,7 +32,7 @@ async function createPost(url, postData) {
     await response.json()
 
     if (response.ok) {
-      location.href = '../main.html'
+      location.href = '../user-posts.html'
     } else {
       if (response.status === 400) {
         showErrorMsg(document.querySelector('#general-error'),
