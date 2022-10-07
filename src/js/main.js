@@ -12,7 +12,7 @@ searchBtn.onclick = function () {
   if (document.querySelector('#search-result')) {
     document.querySelector('#search-result').remove()
   }
-  getPosts(GET_POSTS_URL, searchField.value)
+  getPosts(GET_POSTS_URL, searchField.value.trim())
   postsContainer.insertAdjacentHTML('beforebegin',
       `<div id="search-result">
               <h3 class="text-xl pb-6">Search Results</h3>
@@ -21,7 +21,7 @@ searchBtn.onclick = function () {
 }
 
 searchField.onkeypress = function (event) {
-  if (event.key === 'Enter' && searchField.value) {
+  if (event.key === 'Enter' && searchField.value.trim()) {
     searchBtn.onclick()
   }
 }
