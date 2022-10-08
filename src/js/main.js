@@ -12,11 +12,11 @@ searchBtn.onclick = function () {
   if (document.querySelector('#search-result')) {
     document.querySelector('#search-result').remove()
   }
-  getPosts(GET_POSTS_URL, searchField.value.trim())
+  getPosts(GET_POSTS_URL, searchField.value.toLowerCase().trim())
   postsContainer.insertAdjacentHTML('beforebegin',
       `<div id="search-result">
               <h3 class="text-xl pb-6">Search Results</h3>
-              <a href="../main.html" class="block underline text-sm pb-6">Back to main Posts page</a>
+              <a href="../main.html" class="block text-indigo-700 hover:underline underline-offset-4 text-sm pb-6">Back to main Posts page</a>
             </div>`)
 }
 
