@@ -24,7 +24,7 @@ async function getUserPosts(url) {
     if (!data.length) {
       userPostsContainer.innerHTML +=
           `<h2 class="text-1.5xl">Nothing here</h2>
-           <p class="my-4">Why not <a class="font-semibold underline hover:text-blue-800 dark:hover:text-blue-900" href="../create-post.html">Create a Post?</a></p>`
+           <p class="my-4">Why not <a class="text-indigo-700 hover:underline underline-offset-4 text-md pb-6" href="../create-post.html">Create a Post?</a></p>`
 
     } else {
       const posts = data
