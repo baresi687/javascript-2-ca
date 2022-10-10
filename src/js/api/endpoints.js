@@ -4,7 +4,7 @@ const user = getFromStorage('userKey')
 const API_BASE_URL = 'https://nf-api.onrender.com/api/v1/social'
 const USER_SIGNUP_URL = API_BASE_URL + '/auth/register'
 const USER_LOGIN_URL = API_BASE_URL+ '/auth/login'
-const GET_POSTS_URL = API_BASE_URL + '/posts?_author=true&limit=14'
+const GET_POSTS_URL = API_BASE_URL + '/posts?_author=true&limit=200'
 const CREATE_POST_URL = API_BASE_URL + '/posts'
 const GET_USER_POSTS_URL = API_BASE_URL + `/profiles/${user.name}?_posts=true`
 const EDIT_DELETE_USER_POST = API_BASE_URL + '/posts/'

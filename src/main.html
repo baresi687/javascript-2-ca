@@ -42,6 +42,35 @@
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <section id="post-feed" class="m-auto w-4/6">
         <h1 class="my-8 text-2xl font-semibold dark:text-black">Home</h1>
+        <div id="sort-and-search" class="flex flex-col gap-2">
+          <div class="flex gap-4 w-full">
+            <label for="search-posts" class="grow">
+              <input id="search-posts" class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" type="text" placeholder="Search for posts in title and body">
+            </label>
+            <button id="search-btn" class="rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Search</button>
+          </div>
+          <div class="py-6">
+            <div class="flex flex-col gap-4 sm:flex-row">
+              <div class="flex items-center">
+                <label for="sort-posts" class="mb-0 text-sm font-medium text-gray-900 dark:text-gray-600 w-24">Sort By:</label>
+                <select id="sort-posts" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option value="created" selected>Created</option>
+                  <option value="title">Title</option>
+                </select>
+              </div>
+              <div class="flex gap-4 sm:items-center items-end">
+                <span class="flex gap-1 items-center">
+                  <label for="sort-descending" class="text-sm font-medium text-gray-900 dark:text-gray-600">Descending</label>
+                  <input checked id="sort-descending" type="radio" value="" name="default-radio" class="radio-sort w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                </span>
+                <span class="flex gap-1 items-center">
+                  <label for="sort-ascending" class="text-sm font-medium text-gray-800 dark:text-gray-600">Ascending</label>
+                  <input id="sort-ascending" type="radio" value="" name="default-radio" class="radio-sort w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
         <div id="posts-container" class="flex flex-wrap sm:grid gap-4 grid-cols-2 md:grid-cols-3"></div>
         <div id="general-error" class="text-2xl py-3.5 text-red-500 text-center hidden"></div>
       </section>
