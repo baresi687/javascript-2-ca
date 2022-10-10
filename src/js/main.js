@@ -5,8 +5,21 @@ import {formatDate} from "./utils/dateFormat";
 
 const postsContainer = document.querySelector('#posts-container')
 const token = getFromStorage('accessToken')
+const sortDropDownBtn = document.querySelector('#sortDropdownBtn')
+const sortDropDownMenu = document.querySelector('#sortDropdownMenu')
 const searchField = document.querySelector('#search-posts')
 const searchBtn = document.querySelector('#search-btn')
+
+sortDropDownBtn.onclick = function (event) {
+  event.stopPropagation()
+  sortDropDownMenu.classList.toggle('hidden')
+}
+
+window.onclick = function (event) {
+  if (event.target !== sortDropDownBtn && !sortDropDownMenu.classList.contains('hidden')) {
+    sortDropDownMenu.classList.add('hidden')
+  }
+}
 
 searchBtn.onclick = function () {
   if (document.querySelector('#search-result')) {
