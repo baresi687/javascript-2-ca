@@ -1,25 +1,58 @@
 import {GET_POSTS_URL} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {showErrorMsg} from "./utils/validation";
-import {formatDate} from "./utils/dateFormat";
+import {formatDateLong} from "./utils/dateFormat";
 
 const postsContainer = document.querySelector('#posts-container')
 const token = getFromStorage('accessToken')
-const sortDropDownBtn = document.querySelector('#sortDropdownBtn')
-const sortDropDownMenu = document.querySelector('#sortDropdownMenu')
 const searchField = document.querySelector('#search-posts')
 const searchBtn = document.querySelector('#search-btn')
+const sortPosts = document.querySelector('#sort-posts')
+const sortDesc = document.querySelector('#sort-descending')
+const sortTitleString = `&sort=title`
+const sortAscString = `&sortOrder=asc`
+const radioAscDesc = document.querySelectorAll('.radio-sort')
 
-sortDropDownBtn.onclick = function (event) {
-  event.stopPropagation()
-  sortDropDownMenu.classList.toggle('hidden')
-}
-
-window.onclick = function (event) {
-  if (event.target !== sortDropDownBtn && !sortDropDownMenu.classList.contains('hidden')) {
-    sortDropDownMenu.classList.add('hidden')
+sortPosts.onchange = function (event) {
+  const currentValue = event.target.value
+  switch (currentValue) {
+    case 'created':
+      if (sortDesc.checked) {
+        getPosts(GET_POSTS_URL, searchField.value.toLowerCase().trim())
+      } else {
+        getPosts(GET_POSTS_URL+sortAscString, searchField.value.toLowerCase().trim())
+      }
+      break
+    case 'title':
+      if (sortDesc.checked) {
+        getPosts(GET_POSTS_URL+sortTitleString,searchField.value.toLowerCase().trim())
+      } else {
+        getPosts(GET_POSTS_URL+sortTitleString+sortAscString,searchField.value.toLowerCase().trim())
+      }
+      break
   }
 }
+
+radioAscDesc.forEach((item) => {
+  item.onclick = function () {
+    switch (item.id) {
+      case 'sort-descending':
+        if (sortPosts.value === 'title') {
+          getPosts(GET_POSTS_URL+sortTitleString, searchField.value.toLowerCase().trim())
+        } else {
+          getPosts(GET_POSTS_URL, searchField.value.toLowerCase().trim())
+        }
+        break
+      case 'sort-ascending':
+        if (sortPosts.value === 'title') {
+          getPosts(GET_POSTS_URL+sortTitleString+sortAscString, searchField.value.toLowerCase().trim())
+        } else {
+          getPosts(GET_POSTS_URL+sortAscString, searchField.value.toLowerCase().trim())
+        }
+        break
+    }
+  }
+})
 
 searchBtn.onclick = function () {
   if (document.querySelector('#search-result')) {
@@ -60,7 +93,7 @@ async function getPosts(url, searchValue = '') {
     if (filterPosts.length) {
       data = filterPosts
           .map(({id,title, author, created}) => {
-            const dateFormat = formatDate(created)
+            const dateFormat = formatDateLong(created)
             return `<a href="/post-details.html?id=${id}" class="basis-full p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize">${title}</h5>
                       <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">By ${author.name}</p>

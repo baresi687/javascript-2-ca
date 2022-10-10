@@ -49,29 +49,25 @@
             </label>
             <button id="search-btn" class="rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Search</button>
           </div>
-          <div class="relative py-6">
-            <div class="flex">
-              <button id="sortDropdownBtn" class="w-full rounded-md border border-transparent bg-slate-100 py-2 px-4 text-sm font-medium text-black hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 inline-flex items-center sm:w-32" type="button">Sort by <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-              <div class="flex items-end gap-1 items-center">
+          <div class="py-6">
+            <div class="flex flex-col gap-4 sm:flex-row">
+              <div class="flex items-center">
+                <label for="sort-posts" class="mb-0 text-sm font-medium text-gray-900 dark:text-gray-600 w-24">Sort By:</label>
+                <select id="sort-posts" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option value="created" selected>Created</option>
+                  <option value="title">Title</option>
+                </select>
+              </div>
+              <div class="flex gap-4 sm:items-center items-end">
                 <span class="flex gap-1 items-center">
-                  <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-500">Descending</label>
-                  <input checked id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                  <label for="sort-descending" class="text-sm font-medium text-gray-900 dark:text-gray-600">Descending</label>
+                  <input checked id="sort-descending" type="radio" value="" name="default-radio" class="radio-sort w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 </span>
                 <span class="flex gap-1 items-center">
-                  <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-800 dark:text-gray-500">Ascending</label>
-                  <input id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                  <label for="sort-ascending" class="text-sm font-medium text-gray-800 dark:text-gray-600">Ascending</label>
+                  <input id="sort-ascending" type="radio" value="" name="default-radio" class="radio-sort w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 </span>
               </div>
-            </div>
-            <div id="sortDropdownMenu" class="hidden w-full absolute top-16 z-10 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-600 sm:w-44">
-              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 cursor-pointer">
-                <li>
-                  <div class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Title</div>
-                </li>
-                <li>
-                  <div class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Created</div>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
