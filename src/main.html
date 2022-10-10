@@ -42,31 +42,37 @@
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <section id="post-feed" class="m-auto w-4/6">
         <h1 class="my-8 text-2xl font-semibold dark:text-black">Home</h1>
-        <div id="sort-and-search" class="flex flex-col sm:flex-row gap-10 pb-8 justify-between">
-          <div class="relative">
-            <button id="sortDropdownBtn" class="w-full rounded-md border border-transparent bg-slate-100 py-2 px-4 text-sm font-medium text-black hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 inline-flex items-center sm:w-32" type="button">Sort by <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-            <div id="sortDropdownMenu" class="hidden w-full absolute top-12 z-10 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 sm:w-44">
-              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
-                <li>
-                  <div class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Placeholder</div>
-                </li>
-                <li>
-                  <div class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Placeholder</div>
-                </li>
-                <li>
-                  <div class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Placeholder</div>
-                </li>
-                <li>
-                  <div class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Placeholder</div>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <div id="sort-and-search" class="flex flex-col gap-2">
           <div class="flex gap-4 w-full">
             <label for="search-posts" class="grow">
               <input id="search-posts" class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" type="text" placeholder="Search for posts in title and body">
             </label>
             <button id="search-btn" class="rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Search</button>
+          </div>
+          <div class="relative py-6">
+            <div class="flex">
+              <button id="sortDropdownBtn" class="w-full rounded-md border border-transparent bg-slate-100 py-2 px-4 text-sm font-medium text-black hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 inline-flex items-center sm:w-32" type="button">Sort by <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+              <div class="flex items-end gap-1 items-center">
+                <span class="flex gap-1 items-center">
+                  <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-500">Descending</label>
+                  <input checked id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                </span>
+                <span class="flex gap-1 items-center">
+                  <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-800 dark:text-gray-500">Ascending</label>
+                  <input id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                </span>
+              </div>
+            </div>
+            <div id="sortDropdownMenu" class="hidden w-full absolute top-16 z-10 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-600 sm:w-44">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 cursor-pointer">
+                <li>
+                  <div class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Title</div>
+                </li>
+                <li>
+                  <div class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Created</div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div id="posts-container" class="flex flex-wrap sm:grid gap-4 grid-cols-2 md:grid-cols-3"></div>
