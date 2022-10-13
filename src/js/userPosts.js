@@ -38,14 +38,14 @@ async function getUserPosts(url) {
                 tagsHtml = `<p class="block dark:text-white pt-6">Tags: <span class="italic">${tags.join(', ')}</p>`: null
             return `<div class="p-6 my-2 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                       <div class="flex justify-between ">
-                        <div class="block xl:flex justify-between w-full gap-16">
+                        <a href="../post-details.html?id=${id}" class="block xl:flex justify-between w-full gap-16">
                           <div class="basis-1/2 flex-grow">
                             <h5 id="post-title-${id}" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${title}</h5>
                             <small class="font-normal text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${owner}</span> on ${dateFormat}</small>
                             <p id="post-body-${id}" class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line">${body}</p>
                           </div>
                           ${imageHtml}                        
-                        </div>                      
+                        </a>                      
                         <div class="flex flex-col pl-8">                       
                           <button data-id="${id}" class="delete-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-700 dark:hover:bg-red-600 focus:outline-none dark:focus:ring-blue-800">Delete</button>
                           <button data-id="${id}" class="edit-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</button>
