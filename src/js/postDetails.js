@@ -17,6 +17,7 @@ commentForm.onsubmit = function (event) {
     body: commentBody.value
   }
   commentPost(`${GET_POST_DETAILS}${postId}/comment`, postData)
+  commentForm.reset()
 }
 
 async function getPostDetails(url) {
