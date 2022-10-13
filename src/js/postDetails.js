@@ -8,9 +8,7 @@ const postDetailsContainer = document.querySelector('#post-details-container')
 const titleOfPage = document.querySelector('title')
 const commentsContainer = document.querySelector('#comments-container')
 const commentForm = document.querySelector('#post-comment')
-const commentAsUser = document.querySelector('#comment-as')
 const token = getFromStorage('accessToken')
-const {name} = getFromStorage('userKey')
 
 commentForm.onsubmit = function (event) {
   event.preventDefault()
@@ -41,7 +39,7 @@ async function getPostDetails(url) {
            <div id="post-content-container" class="p-6 my-2 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
              <div id="post-text-img" class="block xl:flex justify-between w-full gap-16">
                <div class="basis-1/2 flex-grow">
-                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize">${title}</h5>
+                 <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize">${title}</h2>
                  <small class="font-normal text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${author.name}</span> on ${dateFormat}</small>
                  <p class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line">${body}</p>
                </div>                                                
@@ -56,18 +54,17 @@ async function getPostDetails(url) {
       tags.length ?
         postDetailsContainer.querySelector('#post-content-container').insertAdjacentHTML('beforeend',tagsHtml) : null
 
-      commentAsUser.innerHTML += name
       commentsContainer.innerHTML = ''
 
       if (comments.length) {
-        commentsContainer.innerHTML += `<h6 class="my-6 text-lg dark:text-black">Comments</h6>`
+        commentsContainer.innerHTML += `<h6 class="my-6 text-lg text-black font-semibold">Comments</h6>`
         const commentsAvailable = comments.map(({owner, body}) => {
           return `
-           <div class="p-6 my-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-             <div class="block xl:flex justify-between w-full gap-16">
+           <div class="p-6 my-6 bg-white rounded-lg bg-gray-800 ">
+             <div class="block xl:flex justify-between w-full gap-16 text-white">
                <div class="basis-1/2 flex-grow">                 
-                 <small class="font-normal text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${owner}</span> on ${dateFormat}</small>
-                 <p class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line">${body}</p>
+                 <small class="font-normal mb-1">By <span class="font-bold">${owner}</span> on ${dateFormat}</small>
+                 <p class="py-4 font-normal mb-1 whitespace-pre-line">${body}</p>
                </div>                                                
              </div>                      
            </div>`
@@ -83,6 +80,7 @@ async function getPostDetails(url) {
     }
 
   } catch (error) {
+    commentForm.classList.add('hidden')
     showErrorMsg(document.querySelector('#general-error'))
   }
 }
