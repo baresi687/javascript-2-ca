@@ -30,6 +30,8 @@ async function getUserPosts(url) {
       const posts = data
           .map(({title, body, id, owner, created, media, tags}) => {
             const dateFormat = formatDateLong(created)
+            const titleEsc = title.replace(/</g, "&lt")
+            const bodyEsc = body.replace(/</g, "&lt")
             let imageHtml = ''
             let tagsHtml = ''
             media.length ?
@@ -40,9 +42,9 @@ async function getUserPosts(url) {
                       <div class="flex justify-between ">
                         <a href="../post-details.html?id=${id}" class="block xl:flex justify-between w-full gap-16">
                           <div class="basis-1/2 flex-grow">
-                            <h5 id="post-title-${id}" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${title}</h5>
+                            <h5 id="post-title-${id}" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${titleEsc}</h5>
                             <small class="font-normal text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${owner}</span> on ${dateFormat}</small>
-                            <p id="post-body-${id}" class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line">${body}</p>
+                            <p id="post-body-${id}" class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line">${bodyEsc}</p>
                           </div>
                           ${imageHtml}                        
                         </a>                      

@@ -93,13 +93,23 @@ async function getPosts(url, searchValue = '') {
     if (filterPosts.length) {
       data = filterPosts
           .map(({id,title, author, created}) => {
+            const postItem = document.createElement('a')
+            const postTitle = document.createElement('h5')
+            const postAuthor = document.createElement('p')
+            const postDate = document.createElement('p')
             const dateFormat = formatDateLong(created)
-            return `<a href="/post-details.html?id=${id}" class="basis-full p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize">${title}</h5>
-                      <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">By ${author.name}</p>
-                      <p class="font-normal text-gray-700 dark:text-gray-300 mb-1">On ${dateFormat}</p>
-                    </a>`
-          }).join('')
+            postItem.classList.add('basis-full', 'p-6', 'bg-white', 'rounded-lg', 'border', 'border-gray-200', 'shadow-md', 'hover:bg-gray-100', 'dark:bg-gray-800', 'dark:border-gray-700', 'dark:hover:bg-gray-700')
+            postItem.href = `/post-details.html?id=${id}`
+            postTitle.classList.add('mb-2', 'text-2xl', 'font-bold', 'tracking-tight', 'text-gray-900', 'dark:text-white', 'capitalize')
+            postAuthor.classList.add('font-normal', 'text-gray-700', 'dark:text-gray-300', 'mb-1')
+            postDate.classList.add('font-normal', 'text-gray-700', 'dark:text-gray-300', 'mb-1')
+            postItem.append(postTitle, postAuthor, postDate)
+            postTitle.textContent = title
+            postAuthor.textContent = `By ${author.name}`
+            postDate.textContent = `On ${dateFormat}`
+            return postsContainer.append(postItem)
+          })
+
     } else {
       data = `<h2 class="text-2xl">No results found</h2>`
     }
