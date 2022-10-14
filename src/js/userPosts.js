@@ -91,8 +91,16 @@ async function getUserPosts(url) {
             title: document.querySelector('#post-title').value,
             body: document.querySelector('#post-body').value,
           }
-          document.querySelector('#post-img').value ? putData.media = document.querySelector('#post-img').value : null
-          editPost(`${EDIT_DELETE_USER_POST}${postId}`, putData)
+          if (document.querySelector('#post-img').value) {
+            if (isImage(document.querySelector('#post-img').value)) {
+              putData.media = document.querySelector('#post-img').value
+              editPost(`${EDIT_DELETE_USER_POST}${postId}`, putData)
+            } else {
+              showErrorMsg(document.querySelector('#general-error-edit'),'Image URL is not valid')
+            }
+          } else {
+            editPost(`${EDIT_DELETE_USER_POST}${postId}`, putData)
+          }
         }
       }
     })
@@ -130,7 +138,7 @@ async function editPost(url, putData) {
       getUserPosts(GET_USER_POSTS_URL)
       postEditModal.classList.add('hidden')
     } else {
-      if (response.status === 400) {
+      if (response.status === 400 || response.status === 500) {
         showErrorMsg(document.querySelector('#general-error-edit'),
             'Image must a valid and a fully formed URL that links to a live and publicly accessible image')
       } else {
@@ -160,4 +168,8 @@ async function deletePost(url) {
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
   }
+}
+
+document.querySelector('#post-img').onkeyup = function () {
+  document.querySelector('#general-error-edit').classList.add('hidden')
 }
