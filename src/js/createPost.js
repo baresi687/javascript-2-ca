@@ -1,6 +1,6 @@
 import {CREATE_POST_URL} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
-import {showErrorMsg} from "./utils/validation";
+import {isImage, showErrorMsg} from "./utils/validation";
 
 const createPostForm = document.querySelector('#create-post')
 const postTitle = document.querySelector('#post-title')
@@ -14,9 +14,22 @@ createPostForm.addEventListener('submit', function (event) {
     title: postTitle.value,
     body: postBody.value,
   }
-  postImage.value ? postData.media = postImage.value : null
-  createPost(CREATE_POST_URL, postData)
+
+  if (postImage.value) {
+    if (isImage(postImage.value)) {
+      postData.media = postImage.value
+      createPost(CREATE_POST_URL, postData)
+    } else {
+      showErrorMsg(document.querySelector('#general-error'),'Image URL is not valid')
+    }
+  } else {
+    createPost(CREATE_POST_URL, postData)
+  }
 })
+
+postImage.onkeyup = function () {
+  document.querySelector('#general-error').classList.add('hidden')
+}
 
 async function createPost(url, postData) {
   try  {
