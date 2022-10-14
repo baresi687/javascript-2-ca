@@ -108,7 +108,7 @@ async function getPosts(url, searchValue = '') {
             postAuthor.textContent = `By ${author.name}`
             postDate.textContent = `On ${dateFormat}`
             return postsContainer.append(postItem)
-          })
+          }).join('')
 
     } else {
       data = `<h2 class="text-2xl">No results found</h2>`
