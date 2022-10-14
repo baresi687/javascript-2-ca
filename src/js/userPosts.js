@@ -2,6 +2,7 @@ import {GET_USER_POSTS_URL, EDIT_DELETE_USER_POST} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {formatDateLong} from "./utils/dateFormat";
 import {isImage, showErrorMsg} from "./utils/validation";
+import {addLoader, removeLoader} from "./utils/loader";
 
 const userPostsContainer = document.querySelector('#user-posts-container')
 const postEditModal = document.querySelector('#modal')
@@ -10,6 +11,7 @@ let postId = ''
 
 async function getUserPosts(url) {
   userPostsContainer.innerHTML = ''
+  addLoader(userPostsContainer)
   try  {
     const options = {
       method: 'GET',
@@ -68,6 +70,7 @@ async function getUserPosts(url) {
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
   } finally {
+    removeLoader()
     const editBtn = document.querySelectorAll('.edit-btn')
     editBtn.forEach((btn) => {
       btn.onclick = function () {
@@ -123,6 +126,7 @@ window.onclick = function (event) {
 getUserPosts(GET_USER_POSTS_URL)
 
 async function editPost(url, putData) {
+  addLoader(postEditModal.querySelector('#edit-post-btn'))
   try {
     const options = {
       method: 'PUT',
@@ -147,10 +151,14 @@ async function editPost(url, putData) {
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error-edit'))
+  } finally {
+    removeLoader()
   }
 }
 
 async function deletePost(url) {
+  userPostsContainer.innerHTML = ''
+  addLoader(userPostsContainer)
   try {
     const options = {
       method: 'DELETE',
@@ -167,6 +175,8 @@ async function deletePost(url) {
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
+  } finally {
+    removeLoader()
   }
 }
 

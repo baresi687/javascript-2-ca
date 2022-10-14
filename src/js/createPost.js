@@ -1,6 +1,7 @@
 import {CREATE_POST_URL} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {isImage, showErrorMsg} from "./utils/validation";
+import {addLoader} from "./utils/loader";
 
 const createPostForm = document.querySelector('#create-post')
 const postTitle = document.querySelector('#post-title')
@@ -32,6 +33,7 @@ postImage.onkeyup = function () {
 }
 
 async function createPost(url, postData) {
+  addLoader(createPostForm.querySelector('#create-post-btn'))
   try  {
     const options = {
       method: 'POST',

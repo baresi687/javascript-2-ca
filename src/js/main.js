@@ -2,6 +2,7 @@ import {GET_POSTS_URL} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {showErrorMsg} from "./utils/validation";
 import {formatDateLong} from "./utils/dateFormat";
+import {addLoader, removeLoader} from "./utils/loader";
 
 const postsContainer = document.querySelector('#posts-container')
 const token = getFromStorage('accessToken')
@@ -74,6 +75,7 @@ searchField.onkeypress = function (event) {
 
 async function getPosts(url, searchValue = '') {
   postsContainer.innerHTML = ''
+  addLoader(postsContainer)
   try  {
     const options = {
       method: 'GET',
@@ -117,6 +119,8 @@ async function getPosts(url, searchValue = '') {
     postsContainer.innerHTML += data
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
+  } finally {
+    removeLoader()
   }
 }
 

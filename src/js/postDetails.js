@@ -2,6 +2,7 @@ import {GET_POST_DETAILS} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {formatDateLong} from "./utils/dateFormat";
 import {isImage, showErrorMsg} from "./utils/validation";
+import {addLoader, removeLoader} from "./utils/loader";
 
 const postId = new URLSearchParams(window.location.search).get('id')
 const postDetailsContainer = document.querySelector('#post-details-container')
@@ -20,7 +21,8 @@ commentForm.onsubmit = function (event) {
   commentForm.reset()
 }
 
-async function getPostDetails(url) {
+async function getPostDetails(url, loader) {
+  loader ? addLoader(postDetailsContainer) : null
   try {
     const options = {
       method: 'GET',
@@ -33,7 +35,7 @@ async function getPostDetails(url) {
     if (response.ok) {
       const responseJSON = await response.json()
       const {title, author, created, body, tags, media, comments, reactions} = responseJSON
-      titleOfPage.innerHTML += title
+      titleOfPage.innerHTML = `SocialMedia - ${title}`
       const dateFormat = formatDateLong(created)
 
       postDetailsContainer.innerHTML = `
@@ -105,6 +107,7 @@ async function getPostDetails(url) {
     showErrorMsg(document.querySelector('#general-error'))
 
   } finally {
+    loader ? removeLoader() : null
     const emojis = document.querySelectorAll('.emojis')
     emojis.forEach((emoji) => {
       emoji.onclick = function () {
@@ -129,7 +132,7 @@ async function commentPost(url, postData) {
     const response = await fetch(url, options)
 
     if (response.ok) {
-      getPostDetails(`${GET_POST_DETAILS}${postId}?_author=true&_comments=true&_reactions=true`)
+      getPostDetails(`${GET_POST_DETAILS}${postId}?_author=true&_comments=true&_reactions=true`, "loader")
     } else {
       showErrorMsg(document.querySelector('#general-error-comment'))
     }
@@ -158,4 +161,4 @@ async function reactOnPost (url) {
   }
 }
 
-getPostDetails(`${GET_POST_DETAILS}${postId}?_author=true&_comments=true&_reactions=true`)
+getPostDetails(`${GET_POST_DETAILS}${postId}?_author=true&_comments=true&_reactions=true`, "loader")
