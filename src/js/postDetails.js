@@ -1,7 +1,7 @@
 import {GET_POST_DETAILS} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {formatDateLong} from "./utils/dateFormat";
-import {showErrorMsg} from "./utils/validation";
+import {isImage, showErrorMsg} from "./utils/validation";
 
 const postId = new URLSearchParams(window.location.search).get('id')
 const postDetailsContainer = document.querySelector('#post-details-container')
@@ -59,8 +59,11 @@ async function getPostDetails(url) {
       const imageHtml = `<div class="basis-auto align-super"><img src="${media}" alt="Image" class="max-h-64 rounded-md"></div>`
       const tagsHtml = `<p class="block dark:text-white pt-6">Tags: <span class="italic">${tags.join(', ')}</span></p>`
 
-      media.length ?
-          postDetailsContainer.querySelector('#post-text-img').insertAdjacentHTML('beforeend', imageHtml) : null
+      if (media.length) {
+        isImage(media) ?
+            postDetailsContainer.querySelector('#post-text-img').insertAdjacentHTML('beforeend', imageHtml) : null
+      }
+
       tags.length ?
           postDetailsContainer.querySelector('#post-text-img').insertAdjacentHTML('afterend',tagsHtml) : null
 

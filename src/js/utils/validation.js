@@ -57,6 +57,17 @@ function validateString(elem, callBack, length, errorMsg) {
 }
 
 /**
+ * Checking whether Image URL is an Image or not.
+ * Inspiration and regex from https://bobbyhadz.com/blog/javascript-check-if-url-is-image
+ * @param url Image URL
+ * @return {boolean}
+ */
+function isImage(url) {
+  const imgRegex = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/
+  return imgRegex.test(url.trim());
+}
+
+/**
  * General Error message for API Calls.
  * @param elem Hidden element
  * @param {string} [message] General Error message
@@ -67,4 +78,4 @@ function showErrorMsg(elem, message = 'Something went wrong.. please try again l
   elem.scrollIntoView({block: "center"})
 }
 
-export {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, showErrorMsg}
+export {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, isImage, showErrorMsg}

@@ -1,7 +1,7 @@
 import {GET_USER_POSTS_URL, EDIT_DELETE_USER_POST} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {formatDateLong} from "./utils/dateFormat";
-import {showErrorMsg} from "./utils/validation";
+import {isImage, showErrorMsg} from "./utils/validation";
 
 const userPostsContainer = document.querySelector('#user-posts-container')
 const postEditModal = document.querySelector('#modal')
@@ -34,10 +34,14 @@ async function getUserPosts(url) {
             const bodyEsc = body.replace(/</g, "&lt")
             let imageHtml = ''
             let tagsHtml = ''
-            media.length ?
-                imageHtml = `<div class="basis-auto"><img id="post-img-${id}" src="${media}" alt="Image" class="max-h-64 rounded-md"></div>` : null
+
+            if (media.length) {
+              isImage(media) ?
+                  imageHtml = `<div class="basis-auto"><img id="post-img-${id}" src="${media}" alt="Image" class="max-h-64 rounded-md"></div>` : null
+            }
             tags.length ?
                 tagsHtml = `<p class="block dark:text-white pt-6">Tags: <span class="italic">${tags.join(', ')}</p>`: null
+
             return `<div class="p-6 my-2 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                       <div class="flex justify-between ">
                         <a href="../post-details.html?id=${id}" class="block xl:flex justify-between w-full gap-16">
