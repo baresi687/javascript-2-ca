@@ -1,7 +1,7 @@
 import {CREATE_POST_URL} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {isImage, showErrorMsg} from "./utils/validation";
-import {addLoader} from "./utils/loader";
+import {addLoader, removeLoader} from "./utils/loader";
 
 const createPostForm = document.querySelector('#create-post')
 const postTitle = document.querySelector('#post-title')
@@ -58,5 +58,7 @@ async function createPost(url, postData) {
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
+  } finally {
+    removeLoader()
   }
 }
