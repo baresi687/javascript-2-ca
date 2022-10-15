@@ -40,14 +40,14 @@ async function getPostDetails(url, loader) {
 
       postDetailsContainer.innerHTML = `
            <div id="post-content-container" class="p-6 my-2 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 text-white">
-             <div id="post-text-img" class="block xl:flex justify-between w-full gap-16">
+             <div id="post-text-img" class="block xl:flex justify-between w-full gap-16 mb-4">
                <div class="basis-1/2 flex-grow">
                  <h2 id="post-title" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize"></h2>
                  <small class="font-normal text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${author.name}</span> on ${dateFormat}</small>
-                 <p id="post-body" class="py-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line"></p>
+                 <p id="post-body" class="pt-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line"></p>
                </div>                                                
              </div>
-             <div class="flex gap-4 pt-6 border-t-2 border-gray-700 mt-4">
+             <div class="flex gap-4 pt-6 border-t-2 border-gray-700">
                <span data-emoji="👍" class="emojis py-2 px-2.5 cursor-pointer rounded-full border-solid border-2 border-gray-600">👍</span>
                <span data-emoji="❤" class="emojis py-2 px-2.5 cursor-pointer rounded-full border-solid border-2 border-gray-600">❤</span>
                <span data-emoji="😂" class="emojis py-2 px-2.5 cursor-pointer rounded-full border-solid border-2 border-gray-600">😂</span>
@@ -59,15 +59,16 @@ async function getPostDetails(url, loader) {
       document.querySelector('#post-body').innerText = body
 
       const imageHtml = `<div class="basis-auto align-super"><img src="${media}" alt="Image" class="max-h-64 rounded-md"></div>`
-      const tagsHtml = `<p class="block dark:text-white pt-6">Tags: <span class="italic">${tags.join(', ')}</span></p>`
+      const tagsHtml = `<p class="block dark:text-white mb-4">Tags: <span class="italic">${tags.join(', ')}</span></p>`
 
       if (media.length) {
         isImage(media) ?
             postDetailsContainer.querySelector('#post-text-img').insertAdjacentHTML('beforeend', imageHtml) : null
       }
 
-      tags.length ?
-          postDetailsContainer.querySelector('#post-text-img').insertAdjacentHTML('afterend',tagsHtml) : null
+      if (tags.length) {
+        tags[0].length ? postDetailsContainer.querySelector('#post-text-img').insertAdjacentHTML('afterend',tagsHtml) : null
+      }
 
       if (reactions.length) {
         const reactionsContainer = `<div class="reactions flex gap-6 pt-6">Reactions:</div>`
