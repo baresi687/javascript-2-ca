@@ -7,6 +7,7 @@ import {
 } from "./utils/validation";
 import {saveToStorage} from "./utils/storage";
 import {USER_LOGIN_URL} from "./api/endpoints";
+import {addLoader, removeLoader} from "./utils/loader";
 
 const loginForm = document.querySelector('form')
 const email = document.querySelector('#email-address')
@@ -40,6 +41,7 @@ formInputs.forEach((item) => {
 
 async function login(url, postData) {
   document.querySelector('#general-error').classList.add('hidden')
+  addLoader(loginForm.querySelector('#login-btn'))
   try  {
     const options = {
       method: 'POST',
@@ -65,5 +67,7 @@ async function login(url, postData) {
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
+  } finally {
+    removeLoader()
   }
 }

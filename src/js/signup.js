@@ -1,5 +1,6 @@
 import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, showErrorMsg} from "./utils/validation";
 import {USER_SIGNUP_URL} from "./api/endpoints";
+import {addLoader, removeLoader} from "./utils/loader";
 
 const signUpform = document.querySelector('form')
 const name = document.querySelector('#name')
@@ -40,6 +41,7 @@ formInputs.forEach((item) => {
 
 async function signUp(url, postData) {
   document.querySelector('#general-error').classList.add('hidden')
+  addLoader(signUpform.querySelector('#sign-up-btn'))
   try  {
     const options = {
       method: 'POST',
@@ -53,9 +55,13 @@ async function signUp(url, postData) {
     if (response.ok) {
       location.href = '../login.html'
     } else {
-      showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
+      let message = responseJSON.message
+      response.status === 500 ? message = 'This email address is already registered.': null
+      showErrorMsg(document.querySelector('#general-error'), message)
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
+  } finally {
+    removeLoader()
   }
 }
