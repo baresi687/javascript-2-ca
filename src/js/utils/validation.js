@@ -68,6 +68,20 @@ function isImage(url) {
 }
 
 /**
+ * To check if avatar is a valid link.
+ * The API unfortunately does not make the same check on avatar as it does on images
+ * @param url Avatar value
+ * @return {Promise<Response>} Returns the response. From there status can be accessed.
+ */
+function isAvatarValid (url) {
+  const urlCorsFix = 'https://noroffcors.herokuapp.com/'+url
+  const isAvatar = async function(urlCorsFix) {
+    return await fetch(urlCorsFix, {method: "HEAD"});
+  }
+  return isAvatar(urlCorsFix)
+}
+
+/**
  * General Error message for API Calls.
  * @param elem Hidden element
  * @param {string} [message] General Error message
@@ -78,4 +92,4 @@ function showErrorMsg(elem, message = 'Something went wrong.. please try again l
   elem.scrollIntoView({block: "center"})
 }
 
-export {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, isImage, showErrorMsg}
+export {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, isImage, isAvatarValid, showErrorMsg}

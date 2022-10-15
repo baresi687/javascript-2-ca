@@ -1,7 +1,7 @@
 import {GET_POST_DETAILS} from "./api/endpoints";
 import {getFromStorage} from "./utils/storage";
 import {formatDateLong} from "./utils/dateFormat";
-import {isImage, showErrorMsg} from "./utils/validation";
+import {isImage, isAvatarValid, showErrorMsg} from "./utils/validation";
 import {addLoader, removeLoader} from "./utils/loader";
 
 const postId = new URLSearchParams(window.location.search).get('id')
@@ -43,7 +43,9 @@ async function getPostDetails(url, loader) {
              <div id="post-text-img" class="block xl:flex justify-between w-full gap-16 mb-4">
                <div class="basis-1/2 flex-grow">
                  <h2 id="post-title" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize"></h2>
-                 <small class="font-normal text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${author.name}</span> on ${dateFormat}</small>
+                 <div id="author-details" class="flex items-center gap-1 mt-4 mb-1">                   
+                   <small class="font-normal text-sm text-gray-700 dark:text-gray-300 mb-1">By <span class="font-bold">${author.name}</span> on ${dateFormat}</small>
+                 </div>                 
                  <p id="post-body" class="pt-4 font-normal text-gray-900 dark:text-white mb-1 whitespace-pre-line"></p>
                </div>                                                
              </div>
@@ -58,8 +60,14 @@ async function getPostDetails(url, loader) {
       document.querySelector('#post-title').innerText = title
       document.querySelector('#post-body').innerText = body
 
-      const imageHtml = `<div class="basis-auto align-super"><img src="${media}" alt="Image" class="max-h-64 rounded-md"></div>`
+      const avatarHtml = `<div style="background-image: url('${author.avatar}')" class="bg-cover bg-center w-10 h-10 mr-2 rounded-full">`
+      const imageHtml = `<div class="basis-auto align-super"><img src="${media}" alt="Image" class="max-h-64 rounded-md mt-2"></div>`
       const tagsHtml = `<p class="block dark:text-white mb-4">Tags: <span class="italic">${tags.join(', ')}</span></p>`
+
+      if (isImage(author.avatar)) {
+        const isValid = await isAvatarValid(author.avatar)
+        isValid.status !== 404 ? postDetailsContainer.querySelector('#author-details').insertAdjacentHTML('afterbegin', avatarHtml) : null
+      }
 
       if (media.length) {
         isImage(media) ?
