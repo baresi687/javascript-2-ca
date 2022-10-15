@@ -65,8 +65,8 @@ async function getPostDetails(url, loader) {
       const tagsHtml = `<p class="block dark:text-white mb-4">Tags: <span class="italic">${tags.join(', ')}</span></p>`
 
       if (isImage(author.avatar)) {
-        const isValid = await isAvatarValid(author.avatar)
-        isValid.status !== 404 ? postDetailsContainer.querySelector('#author-details').insertAdjacentHTML('afterbegin', avatarHtml) : null
+        const isAvValid = await isAvatarValid(author.avatar)
+        isAvValid ? postDetailsContainer.querySelector('#author-details').insertAdjacentHTML('afterbegin', avatarHtml) : null
       }
 
       if (media.length) {

@@ -1,4 +1,13 @@
-import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, showErrorMsg} from "./utils/validation";
+import {
+  checkName,
+  checkNoroffEmail,
+  checkLength,
+  checkConfirmPassword,
+  validateString,
+  showErrorMsg,
+  isImage
+
+} from "./utils/validation";
 import {USER_SIGNUP_URL} from "./api/endpoints";
 import {addLoader, removeLoader} from "./utils/loader";
 
@@ -11,6 +20,8 @@ const password = document.querySelector('#password')
 const passwordError = 'Password must 8 characters or more'
 const confirmPassword = document.querySelector('#confirm-password')
 const conFirmPasswordError = 'Confirmed password does not match password'
+const avatar = document.querySelector('#avatar')
+const avatarError = 'Avatar must be a valid and public URL'
 const formInputs = document.querySelectorAll('#form-inputs input')
 
 signUpform.addEventListener('submit', function (event)  {
@@ -26,9 +37,17 @@ signUpform.addEventListener('submit', function (event)  {
     const formData = {
       'name': name.value,
       'email': email.value,
-      'password': password.value
+      'password': password.value,
     }
-    signUp(USER_SIGNUP_URL, formData)
+    if (avatar.value) {
+      const avatarVal = validateString(avatar, isImage, null, avatarError)
+      if (avatarVal) {
+        formData.avatar = avatar.value
+        signUp(USER_SIGNUP_URL, formData)
+      }
+    } else {
+      signUp(USER_SIGNUP_URL, formData)
+    }
   }
 })
 

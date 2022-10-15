@@ -64,7 +64,11 @@ function validateString(elem, callBack, length, errorMsg) {
  */
 function isImage(url) {
   const imgRegex = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/
-  return imgRegex.test(url.trim());
+  if (typeof url === 'object') {
+    return imgRegex.test(url.value)
+  } else {
+    return imgRegex.test(url);
+  }
 }
 
 /**
@@ -76,7 +80,7 @@ function isImage(url) {
 function isAvatarValid (url) {
   const urlCorsFix = 'https://noroffcors.herokuapp.com/'+url
   const isAvatar = async function(urlCorsFix) {
-    return await fetch(urlCorsFix, {method: "HEAD"});
+    return await fetch(urlCorsFix, {method: "HEAD"}).then(res => res.ok)
   }
   return isAvatar(urlCorsFix)
 }
