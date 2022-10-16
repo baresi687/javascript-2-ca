@@ -21,7 +21,7 @@ const passwordError = 'Password must 8 characters or more'
 const confirmPassword = document.querySelector('#confirm-password')
 const conFirmPasswordError = 'Confirmed password does not match password'
 const avatar = document.querySelector('#avatar')
-const avatarError = 'Avatar must be a valid and public URL'
+const avatarError = 'Avatar must be a valid and public image URL'
 const formInputs = document.querySelectorAll('#form-inputs input')
 
 signUpform.addEventListener('submit', function (event)  {
@@ -31,23 +31,17 @@ signUpform.addEventListener('submit', function (event)  {
       validateString(name, checkName,null, nameError) &&
       validateString(email, checkNoroffEmail, null, emailError) &&
       validateString(password, checkLength, 8, passwordError) &&
-      validateString(confirmPassword, checkConfirmPassword, password, conFirmPasswordError);
+      validateString(confirmPassword, checkConfirmPassword, password, conFirmPasswordError) &&
+      ((!avatar.value) || validateString(avatar, isImage, null, avatarError));
 
   if (isFormValid) {
     const formData = {
       'name': name.value,
       'email': email.value,
-      'password': password.value,
+      'password': password.value
     }
-    if (avatar.value) {
-      const avatarVal = validateString(avatar, isImage, null, avatarError)
-      if (avatarVal) {
-        formData.avatar = avatar.value
-        signUp(USER_SIGNUP_URL, formData)
-      }
-    } else {
-      signUp(USER_SIGNUP_URL, formData)
-    }
+    avatar.value ? formData.avatar = avatar.value : null
+    signUp(USER_SIGNUP_URL, formData)
   }
 })
 
