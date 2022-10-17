@@ -1,4 +1,13 @@
-import {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, showErrorMsg} from "./utils/validation";
+import {
+  checkName,
+  checkNoroffEmail,
+  checkLength,
+  checkConfirmPassword,
+  validateString,
+  showErrorMsg,
+  isImage
+
+} from "./utils/validation";
 import {USER_SIGNUP_URL} from "./api/endpoints";
 import {addLoader, removeLoader} from "./utils/loader";
 
@@ -11,6 +20,8 @@ const password = document.querySelector('#password')
 const passwordError = 'Password must 8 characters or more'
 const confirmPassword = document.querySelector('#confirm-password')
 const conFirmPasswordError = 'Confirmed password does not match password'
+const avatar = document.querySelector('#avatar')
+const avatarError = 'Avatar must have image filename ending (.jpg .gif .png etc)'
 const formInputs = document.querySelectorAll('#form-inputs input')
 
 signUpform.addEventListener('submit', function (event)  {
@@ -20,7 +31,8 @@ signUpform.addEventListener('submit', function (event)  {
       validateString(name, checkName,null, nameError) &&
       validateString(email, checkNoroffEmail, null, emailError) &&
       validateString(password, checkLength, 8, passwordError) &&
-      validateString(confirmPassword, checkConfirmPassword, password, conFirmPasswordError);
+      validateString(confirmPassword, checkConfirmPassword, password, conFirmPasswordError) &&
+      ((!avatar.value) || validateString(avatar, isImage, null, avatarError));
 
   if (isFormValid) {
     const formData = {
@@ -28,6 +40,7 @@ signUpform.addEventListener('submit', function (event)  {
       'email': email.value,
       'password': password.value
     }
+    avatar.value ? formData.avatar = avatar.value : null
     signUp(USER_SIGNUP_URL, formData)
   }
 })
@@ -56,6 +69,7 @@ async function signUp(url, postData) {
       location.href = '../login.html'
     } else {
       let message = responseJSON.message
+      responseJSON.message === 'body/avatar must match format "uri"' ? message = 'Avatar must be a valid and public URL' : null
       response.status === 500 ? message = 'This email address is already registered.': null
       showErrorMsg(document.querySelector('#general-error'), message)
     }

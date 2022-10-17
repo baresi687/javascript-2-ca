@@ -64,7 +64,30 @@ function validateString(elem, callBack, length, errorMsg) {
  */
 function isImage(url) {
   const imgRegex = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/
-  return imgRegex.test(url.trim());
+  if (typeof url === 'object') {
+    return imgRegex.test(url.value)
+  } else {
+    return imgRegex.test(url);
+  }
+}
+
+/**
+ * To check if avatar is a valid link.
+ * The API unfortunately does not make the same check on avatar as it does on images
+ * @param url Avatar value
+ * @return {Promise<Response>} Returns the response. From there response.ok can be accessed.
+ */
+function isAvatarValid (url) {
+   async function checkAvatar(url) {
+    try {
+      const response = await fetch(url, {method: "HEAD"})
+      return response.ok;
+    } catch (error) {
+      console.log('%cUser Avatar is broken.', 'color: #bada55');
+      console.log('%cIf CORS error: https://noroffcors.herokuapp.com/ would work, but it would be slow. Decided not to use', 'color: #bada55');
+    }
+  }
+  return checkAvatar(url)
 }
 
 /**
@@ -78,4 +101,4 @@ function showErrorMsg(elem, message = 'Something went wrong.. please try again l
   elem.scrollIntoView({block: "center"})
 }
 
-export {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, isImage, showErrorMsg}
+export {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, isImage, isAvatarValid, showErrorMsg}
