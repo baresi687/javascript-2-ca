@@ -63,7 +63,7 @@ async function login(url, postData) {
       saveToStorage('userKey', userKey)
       location.href = '../main.html'
     } else {
-      showErrorMsg(document.querySelector('#general-error'), responseJSON.message)
+      showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message)
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))

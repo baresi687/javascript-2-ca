@@ -68,10 +68,7 @@ async function signUp(url, postData) {
     if (response.ok) {
       location.href = '../login.html'
     } else {
-      let message = responseJSON.message
-      responseJSON.message === 'body/avatar must match format "uri"' ? message = 'Avatar must be a valid and public URL' : null
-      response.status === 500 ? message = 'This email address is already registered.': null
-      showErrorMsg(document.querySelector('#general-error'), message)
+      showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message)
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
