@@ -37,7 +37,7 @@ async function getUserPosts(url) {
             let imageHtml = ''
             let tagsHtml = ''
 
-            if (media.length) {
+            if (media) {
               isImage(media) ?
                   imageHtml = `<div class="basis-auto"><img id="post-img-${id}" src="${media}" alt="Image" class="max-h-64 rounded-md"></div>` : null
             }
@@ -68,6 +68,7 @@ async function getUserPosts(url) {
     }
 
   } catch (error) {
+    console.log(error);
     showErrorMsg(document.querySelector('#general-error'))
   } finally {
     removeLoader()

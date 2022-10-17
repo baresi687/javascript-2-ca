@@ -64,12 +64,14 @@ async function getPostDetails(url, loader) {
       const imageHtml = `<div class="basis-auto align-super"><img src="${media}" alt="Image" class="max-h-64 rounded-md mt-2"></div>`
       const tagsHtml = `<p class="block dark:text-white mb-4">Tags: <span class="italic">${tags.join(', ')}</span></p>`
 
-      if (isImage(author.avatar)) {
-        const isAvValid = await isAvatarValid(author.avatar)
-        isAvValid ? postDetailsContainer.querySelector('#author-details').insertAdjacentHTML('afterbegin', avatarHtml) : null
+      if (author.avatar) {
+        if (isImage(author.avatar)) {
+          const isAvValid = await isAvatarValid(author.avatar)
+          isAvValid ? postDetailsContainer.querySelector('#author-details').insertAdjacentHTML('afterbegin', avatarHtml) : null
+        }
       }
 
-      if (media.length) {
+      if (media) {
         isImage(media) ?
             postDetailsContainer.querySelector('#post-text-img').insertAdjacentHTML('beforeend', imageHtml) : null
       }
@@ -114,6 +116,7 @@ async function getPostDetails(url, loader) {
     }
 
   } catch (error) {
+    console.log(error);
     showErrorMsg(document.querySelector('#general-error'))
 
   } finally {
