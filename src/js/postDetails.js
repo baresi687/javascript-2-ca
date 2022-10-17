@@ -116,7 +116,6 @@ async function getPostDetails(url, loader) {
     }
 
   } catch (error) {
-    console.log(error);
     showErrorMsg(document.querySelector('#general-error'))
 
   } finally {

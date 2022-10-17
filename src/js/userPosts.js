@@ -68,7 +68,6 @@ async function getUserPosts(url) {
     }
 
   } catch (error) {
-    console.log(error);
     showErrorMsg(document.querySelector('#general-error'))
   } finally {
     removeLoader()
