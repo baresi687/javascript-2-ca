@@ -99,7 +99,7 @@ async function getUserPosts(url) {
               putData.media = document.querySelector('#post-img').value
               editPost(`${EDIT_DELETE_USER_POST}${postId}`, putData)
             } else {
-              showErrorMsg(document.querySelector('#general-error-edit'),'Image URL is not valid')
+              showErrorMsg(document.querySelector('#general-error-edit'),'Image URL must have a filename ending of .jpg, .gif, .png etc.')
             }
           } else {
             editPost(`${EDIT_DELETE_USER_POST}${postId}`, putData)
@@ -137,17 +137,12 @@ async function editPost(url, putData) {
       body: JSON.stringify(putData)
     };
     const response = await fetch(url, options)
-    await response.json()
+    const responseJSON = await response.json()
     if (response.ok) {
       getUserPosts(GET_USER_POSTS_URL)
       postEditModal.classList.add('hidden')
     } else {
-      if (response.status === 400 || response.status === 500) {
-        showErrorMsg(document.querySelector('#general-error-edit'),
-            'Image must a valid and a fully formed URL that links to a live and publicly accessible image')
-      } else {
-        showErrorMsg(document.querySelector('#general-error-edit'))
-      }
+      showErrorMsg(document.querySelector('#general-error-edit'), responseJSON.errors[0].message)
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error-edit'))

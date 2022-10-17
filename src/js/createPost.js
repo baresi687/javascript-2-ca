@@ -21,7 +21,7 @@ createPostForm.addEventListener('submit', function (event) {
       postData.media = postImage.value
       createPost(CREATE_POST_URL, postData)
     } else {
-      showErrorMsg(document.querySelector('#general-error'),'Image URL is not valid')
+      showErrorMsg(document.querySelector('#general-error'),'Image URL must have a filename ending of .jpg, .gif, .png etc.')
     }
   } else {
     createPost(CREATE_POST_URL, postData)
@@ -44,17 +44,12 @@ async function createPost(url, postData) {
       body: JSON.stringify(postData),
     };
     const response = await fetch(url, options)
-    await response.json()
+    const responseJSON = await response.json()
 
     if (response.ok) {
       location.href = '../user-posts.html'
     } else {
-      if (response.status === 400) {
-        showErrorMsg(document.querySelector('#general-error'),
-            'Image must a valid and a fully formed URL that links to a live and publicly accessible image')
-      } else {
-        showErrorMsg(document.querySelector('#general-error'))
-      }
+      showErrorMsg(document.querySelector('#general-error'), responseJSON.errors[0].message)
     }
   } catch (error) {
     showErrorMsg(document.querySelector('#general-error'))
