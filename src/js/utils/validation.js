@@ -75,14 +75,19 @@ function isImage(url) {
  * To check if avatar is a valid link.
  * The API unfortunately does not make the same check on avatar as it does on images
  * @param url Avatar value
- * @return {Promise<Response>} Returns the response. From there status can be accessed.
+ * @return {Promise<Response>} Returns the response. From there response.ok can be accessed.
  */
 function isAvatarValid (url) {
-  const urlCorsFix = 'https://noroffcors.herokuapp.com/'+url
-  const isAvatar = async function(urlCorsFix) {
-    return await fetch(urlCorsFix, {method: "HEAD"}).then(res => res.ok)
+   async function checkAvatar(url) {
+    try {
+      const response = await fetch(url, {method: "HEAD"})
+      return response.ok;
+    } catch (error) {
+      console.log('%cUser Avatar is broken.', 'color: #bada55');
+      console.log('%cIf CORS error: https://noroffcors.herokuapp.com/ would work, but it would be slow. Decided not to use', 'color: #bada55');
+    }
   }
-  return isAvatar(urlCorsFix)
+  return checkAvatar(url)
 }
 
 /**

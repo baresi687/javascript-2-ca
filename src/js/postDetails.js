@@ -57,8 +57,8 @@ async function getPostDetails(url, loader) {
              </div>                      
            </div>`
 
-      document.querySelector('#post-title').innerText = title
-      document.querySelector('#post-body').innerText = body
+      document.querySelector('#post-title').innerText = title.trim()
+      document.querySelector('#post-body').innerText = body.trim()
 
       const avatarHtml = `<div style="background-image: url('${author.avatar}')" class="bg-cover bg-center w-10 h-10 mr-2 rounded-full">`
       const imageHtml = `<div class="basis-auto align-super"><img src="${media}" alt="Image" class="max-h-64 rounded-md mt-2"></div>`
@@ -92,12 +92,13 @@ async function getPostDetails(url, loader) {
 
       if (comments.length) {
         commentsContainer.innerHTML += `<h6 class="my-6 text-lg text-black font-semibold">Comments</h6>`
-        const commentsAvailable = comments.map(({owner, body}) => {
+        const commentsAvailable = comments.map(({owner, created, body}) => {
+          const commentDate = formatDateLong(created)
           return `
            <div class="p-6 my-6 bg-white rounded-lg bg-gray-800 ">
              <div class="block xl:flex justify-between w-full gap-16 text-white">
                <div class="basis-1/2 flex-grow">                 
-                 <small class="font-normal mb-1">By <span class="font-bold">${owner}</span> on ${dateFormat}</small>
+                 <small class="font-normal mb-1">By <span class="font-bold">${owner}</span> on ${commentDate}</small>
                  <p class="py-4 font-normal mb-1 whitespace-pre-line">${body}</p>
                </div>                                                
              </div>                      
