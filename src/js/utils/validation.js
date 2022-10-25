@@ -4,8 +4,8 @@
  * @return {boolean}
  */
 function checkName(elem) {
-  const regex = /^\w+$/
-  return regex.test(elem.value.trim())
+  const regex = /^\w+$/;
+  return regex.test(elem.value.trim());
 }
 
 /**
@@ -14,8 +14,8 @@ function checkName(elem) {
  * @return {boolean}
  */
 function checkNoroffEmail(elem) {
-  const regex = /^[\w\-.]+@(stud.)?noroff.no$/
-  return regex.test(elem.value)
+  const regex = /^[\w\-.]+@(stud.)?noroff.no$/;
+  return regex.test(elem.value);
 }
 
 /**
@@ -25,7 +25,7 @@ function checkNoroffEmail(elem) {
  * @return {boolean}
  */
 function checkLength(elem, length) {
-  return elem.value.trim().length >= length
+  return elem.value.trim().length >= length;
 }
 
 /**
@@ -48,11 +48,11 @@ function checkConfirmPassword(elem, password) {
  */
 function validateString(elem, callBack, length, errorMsg) {
   if (!callBack(elem, length)) {
-    elem.classList.add('bg-red-50')
-    elem.nextElementSibling.innerHTML = errorMsg
-    return false
+    elem.classList.add("bg-red-50");
+    elem.nextElementSibling.innerHTML = errorMsg;
+    return false;
   } else {
-    return true
+    return true;
   }
 }
 
@@ -63,9 +63,9 @@ function validateString(elem, callBack, length, errorMsg) {
  * @return {boolean}
  */
 function isImage(url) {
-  const imgRegex = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/
-  if (typeof url === 'object') {
-    return imgRegex.test(url.value)
+  const imgRegex = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/;
+  if (typeof url === "object") {
+    return imgRegex.test(url.value);
   } else {
     return imgRegex.test(url);
   }
@@ -77,17 +77,20 @@ function isImage(url) {
  * @param url Avatar value
  * @return {Promise<Response>} Returns the response. From there response.ok can be accessed.
  */
-function isAvatarValid (url) {
-   async function checkAvatar(url) {
+function isAvatarValid(url) {
+  async function checkAvatar(url) {
     try {
-      const response = await fetch(url, {method: "HEAD"})
+      const response = await fetch(url, { method: "HEAD" });
       return response.ok;
     } catch (error) {
-      console.log('%cUser Avatar is broken.', 'color: #bada55');
-      console.log('%cIf CORS error: https://noroffcors.herokuapp.com/ would work, but it would be slow. Decided not to use', 'color: #bada55');
+      console.log("%cUser Avatar is broken.", "color: #bada55");
+      console.log(
+        "%cIf CORS error: https://noroffcors.herokuapp.com/ would work, but it would be slow. Decided not to use",
+        "color: #bada55"
+      );
     }
   }
-  return checkAvatar(url)
+  return checkAvatar(url);
 }
 
 /**
@@ -95,10 +98,22 @@ function isAvatarValid (url) {
  * @param elem Hidden element
  * @param {string} [message] General Error message
  */
-function showErrorMsg(elem, message = 'Something went wrong.. please try again later') {
-  elem.classList.remove('hidden');
+function showErrorMsg(
+  elem,
+  message = "Something went wrong.. please try again later"
+) {
+  elem.classList.remove("hidden");
   elem.innerHTML = message;
-  elem.scrollIntoView({block: "center"})
+  elem.scrollIntoView({ block: "center" });
 }
 
-export {checkName, checkNoroffEmail, checkLength, checkConfirmPassword, validateString, isImage, isAvatarValid, showErrorMsg}
+export {
+  checkName,
+  checkNoroffEmail,
+  checkLength,
+  checkConfirmPassword,
+  validateString,
+  isImage,
+  isAvatarValid,
+  showErrorMsg,
+};

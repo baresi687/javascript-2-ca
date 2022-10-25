@@ -1,12 +1,14 @@
-import {clearStorage, getFromStorage} from "./utils/storage";
+import { clearStorage, getFromStorage } from "./utils/storage";
 
-if(!localStorage.getItem('accessToken')) {location.href = '/login.html'}
+if (!localStorage.getItem("accessToken")) {
+  location.href = "/login.html";
+}
 
-const {name} = getFromStorage('userKey')
-const userGreeting = document.querySelector('#user-greeting')
-const logOut = document.querySelector('#log-out')
+const { name } = getFromStorage("userKey");
+const userGreeting = document.querySelector("#user-greeting");
+const logOut = document.querySelector("#log-out");
 
-userGreeting.innerHTML = `Hi ${name}`
-logOut.addEventListener('click', function () {
-  clearStorage()
-})
+userGreeting.innerHTML = `Hi ${name}`;
+logOut.addEventListener("click", function () {
+  clearStorage();
+});
